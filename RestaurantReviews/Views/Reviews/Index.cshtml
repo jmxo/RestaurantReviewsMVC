@@ -1,0 +1,18 @@
+﻿@model IEnumerable<RestaurantReviews.Models.RestaurantReview>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Latest Reviews</h2>
+
+@foreach (var item in Model)
+{
+    
+    @Html.Partial("_Review", item)
+
+}
+
+<p>
+    @Html.ActionLink("Create New","Create")
+</p>
