@@ -8,6 +8,7 @@ namespace RestaurantReviews
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            // you can add your custom filter here
         }
     }
 }

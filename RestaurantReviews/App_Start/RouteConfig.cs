@@ -11,7 +11,11 @@ namespace RestaurantReviews
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}"); // like trace.axd
+
+            routes.MapRoute("Cuisine",
+                "cuisine/{name}",
+                new { controller = "Cuisine", action = "Search", name = UrlParameter.Optional });
 
             routes.MapRoute(
                 name: "Default",
