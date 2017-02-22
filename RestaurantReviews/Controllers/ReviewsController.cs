@@ -11,6 +11,9 @@ namespace RestaurantReviews.Controllers
     {
 
         [ChildActionOnly] // cannot be called directly
+        // we can then call this from anywhere, _Layout for example,
+        // without messing with a @model
+        // @Action("BestReview","Reviews")
         public ActionResult BestReview()
         {
             var bestReview = from r in _reviews
@@ -18,9 +21,7 @@ namespace RestaurantReviews.Controllers
                              select r;
             return PartialView("_Review", bestReview.First());
         }
-        // we can then call this from anywhere, _Layout for example,
-        // without messing with a @model
-        // @Action("BestReview","Reviews")
+        
 
 
         // GET: Reviews
@@ -28,7 +29,7 @@ namespace RestaurantReviews.Controllers
         {
             var model =
                 from r in _reviews
-                orderby r.Country
+                //orderby r.Country
                 select r;
 
             return View(model);
@@ -107,30 +108,30 @@ namespace RestaurantReviews.Controllers
 
         static List<RestaurantReview> _reviews = new List<RestaurantReview>
         {
-            new RestaurantReview
-            {
-                Id = 1,
-                Name = "Ozone",
-                City = "Khartoum",
-                Country = "Sudan",
-                Rating = 10
-            },
-            new RestaurantReview
-            {
-                Id = 2,
-                Name = "Le Grill",
-                City = "Paris",
-                Country = "France",
-                Rating = 9
-            },
-            new RestaurantReview
-            {
-                Id = 1,
-                Name = "Pizza Italy",
-                City = "Rome",
-                Country = "Italy",
-                Rating = 8
-            },
+            //new RestaurantReview
+            //{
+            //    Id = 1,
+            //    Name = "Ozone",
+            //    City = "Khartoum",
+            //    Country = "Sudan",
+            //    Rating = 10
+            //},
+            //new RestaurantReview
+            //{
+            //    Id = 2,
+            //    Name = "Le Grill",
+            //    City = "Paris",
+            //    Country = "France",
+            //    Rating = 9
+            //},
+            //new RestaurantReview
+            //{
+            //    Id = 1,
+            //    Name = "Pizza Italy",
+            //    City = "Rome",
+            //    Country = "Italy",
+            //    Rating = 8
+            //},
         };
 
     }
