@@ -1,14 +1,24 @@
-﻿@model IEnumerable<RestaurantReviews.Models.Restaurant>
+﻿@model IEnumerable<RestaurantReviews.Models.RestaurantListViewModel>
 
 @{
     ViewBag.Title = "Home Page";
 }
 
+<form method="get">
+    <input type="search" name="searchTerm"/>
+    <input type="submit" value="Search By Name" />
+</form>
+
 @foreach (var item in Model)
 {
-    <div>
+    <div class="restaurant">
         <h4>@item.Name</h4>
-        <div>@item.City, @item.Country</div>
+        <div>
+            @item.City, @item.Country
+        </div>
+        <div>
+            Reviews: @item.CountOfReviews
+        </div>
         <hr />
     </div>
 }

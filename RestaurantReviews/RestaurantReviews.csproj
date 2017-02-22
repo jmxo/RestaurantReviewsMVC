@@ -213,6 +213,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Restaurant.cs" />
+    <Compile Include="Models\RestaurantListViewModel.cs" />
     <Compile Include="Models\RestaurantReview.cs" />
     <Compile Include="Models\RestaurantReviewsDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

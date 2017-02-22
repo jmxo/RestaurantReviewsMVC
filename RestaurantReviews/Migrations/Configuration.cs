@@ -27,7 +27,7 @@ namespace RestaurantReviews.Migrations
                     Country = "Italy",
                     Reviews = new List<RestaurantReview>
                     {
-                        new RestaurantReview {Rating = 9, Body="Great Food!" }
+                        new RestaurantReview {Rating = 9, Body="Great Food!", ReviewerName="Mike" }
                     }
                 });
         }
