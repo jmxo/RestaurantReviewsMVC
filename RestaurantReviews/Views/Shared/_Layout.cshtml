@@ -5,6 +5,7 @@
     <title>@ViewBag.Title - My ASP.NET MVC Application</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/themes/base/css")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -13,7 +14,7 @@
         <div class="content-wrapper">
             <div class="text-center">
                 <a href="@Url.Action("Index", "Home")">
-                    <img class="img-responsive" src="~/Content/images/OdeToFood.png" alt="OdeToFood" style="display: inline-block" />
+                    <img class="img-responsive" src="~/Content/images/banner.png" alt="Restaurant Reviews" style="display: inline-block; max-height:150px" />
                 </a>
             </div>
             <div class="float-right">
@@ -45,7 +46,7 @@
         </div>
     </footer>
 
-    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/rr")
     @RenderSection("scripts", required: false)
 </body>
 </html>

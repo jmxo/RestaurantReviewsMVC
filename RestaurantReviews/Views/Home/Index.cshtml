@@ -4,21 +4,21 @@
     ViewBag.Title = "Home Page";
 }
 
-<form method="get">
-    <input type="search" name="searchTerm"/>
+<form method="get" action="@Url.Action("Index")" data-ismat-ajax="true" data-ismat-target="#restaurantList">
+    <input type="search" name="searchTerm" data-ismat-autocomplete="@Url.Action("Autocomplete")"/>
     <input type="submit" value="Search By Name" />
 </form>
 
-@foreach (var item in Model)
+@*@using(Ajax.BeginForm(
+    new AjaxOptions
+    {
+        HttpMethod="get",
+        InsertionMode=InsertionMode.Replace,
+        UpdateTargetId="restaurantList"
+    }))
 {
-    <div class="restaurant">
-        <h4>@item.Name</h4>
-        <div>
-            @item.City, @item.Country
-        </div>
-        <div>
-            Reviews: @item.CountOfReviews
-        </div>
-        <hr />
-    </div>
-}
+    <input type="search" name="searchTerm" data-ismat-autocomplete="@Url.Action("Autocomplete")" />
+    <input type="submit" value="Search By Name" />
+}*@
+
+@Html.Partial("_Restaurants", Model)
