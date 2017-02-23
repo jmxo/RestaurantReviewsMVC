@@ -771,7 +771,7 @@ tr.pager td {
     font-size: .8em;    
 }
 
-.restaurant hr {
+hr {
     border-top-color: gray;
     margin-bottom:10px;
     margin-top:10px;
@@ -781,3 +781,4 @@ tr.pager td {
     font-weight: bold;
     font-size: 1.4em;
 }
+

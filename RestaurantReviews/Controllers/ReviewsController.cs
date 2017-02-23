@@ -1,6 +1,7 @@
 ﻿using RestaurantReviews.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,130 +10,74 @@ namespace RestaurantReviews.Controllers
 {
     public class ReviewsController : Controller
     {
+        RestaurantReviewsDb _db = new RestaurantReviewsDb();
 
-        [ChildActionOnly] // cannot be called directly
-        // we can then call this from anywhere, _Layout for example,
-        // without messing with a @model
-        // @Action("BestReview","Reviews")
-        public ActionResult BestReview()
+        public ActionResult Index([Bind(Prefix="id")] int restaurantId)
         {
-            var bestReview = from r in _reviews
-                             orderby r.Rating descending
-                             select r;
-            return PartialView("_Review", bestReview.First());
+            var restaurant = _db.Restaurants.Find(restaurantId);
+            if (restaurant != null)
+            {
+                return View(restaurant);
+            }
+
+            return HttpNotFound();
         }
-        
 
-
-        // GET: Reviews
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Create(int restaurantId)
         {
-            var model =
-                from r in _reviews
-                //orderby r.Country
-                select r;
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult Create(RestaurantReview review)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Reviews.Add(review);
+                _db.SaveChanges();
+                return RedirectToAction("Index", new { id = review.RestaurantId });
+            }
+            return View(review);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var model = _db.Reviews.Find(id);
             return View(model);
         }
 
-        // GET: Reviews/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Reviews/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Reviews/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Edit(/*[Bind(Exclude="ReviewerName")]*/ RestaurantReview review)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Reviews/Edit/5
-        public ActionResult Edit(int id)
-        {
-            var review = _reviews.Single(r => r.Id == id);
-            return View(review);
-        }
-
-        // POST: Reviews/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            var review = _reviews.Single(r => r.Id == id);
-            if (TryUpdateModel(review))
-            {
-                // save to db
-                return RedirectToAction("Index");
-
+                _db.Entry(review).State = EntityState.Modified;
+                _db.SaveChanges();
+                return RedirectToAction("Index", new { id = review.RestaurantId });
             }
             return View(review);
         }
 
-        // GET: Reviews/Delete/5
-        public ActionResult Delete(int id)
+        protected override void Dispose(bool disposing)
         {
-            return View();
+            _db.Dispose();
+            base.Dispose(disposing);
         }
 
-        // POST: Reviews/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        static List<RestaurantReview> _reviews = new List<RestaurantReview>
-        {
-            //new RestaurantReview
-            //{
-            //    Id = 1,
-            //    Name = "Ozone",
-            //    City = "Khartoum",
-            //    Country = "Sudan",
-            //    Rating = 10
-            //},
-            //new RestaurantReview
-            //{
-            //    Id = 2,
-            //    Name = "Le Grill",
-            //    City = "Paris",
-            //    Country = "France",
-            //    Rating = 9
-            //},
-            //new RestaurantReview
-            //{
-            //    Id = 1,
-            //    Name = "Pizza Italy",
-            //    City = "Rome",
-            //    Country = "Italy",
-            //    Rating = 8
-            //},
-        };
-
+        //[ChildActionOnly] // cannot be called directly
+        //// we can then call this from anywhere, _Layout for example,
+        //// without messing with a @model
+        //// @Action("BestReview","Reviews")
+        //public ActionResult BestReview()
+        //{
+        //    var bestReview = from r in _reviews
+        //                     orderby r.Rating descending
+        //                     select r;
+        //    return PartialView("_Review", bestReview.First());
+        //}
     }
+
 }
