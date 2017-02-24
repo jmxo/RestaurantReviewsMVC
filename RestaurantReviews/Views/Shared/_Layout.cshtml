@@ -12,10 +12,13 @@
 <body>
     <header>
         <div class="content-wrapper">
-            <div class="text-center">
-                <a href="@Url.Action("Index", "Home")">
-                    <img class="img-responsive" src="~/Content/images/banner.png" alt="Restaurant Reviews" style="display: inline-block; max-height:150px" />
-                </a>
+            <div class="float-left">
+                <p class="site-title">
+                    <a href="@Url.Action("Index", "Home")">
+                        <img src="~/Content/images/banner.png" alt="Restaurant Reviews" />
+                    </a>
+
+                </p>
             </div>
             <div class="float-right">
                 <section id="login">
@@ -40,7 +43,7 @@
     </div>
     <footer>
         <div class="content-wrapper">
-            <div class="float-left">
+            <div class="text-center">
                 <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
             </div>
         </div>

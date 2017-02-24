@@ -18,6 +18,7 @@ namespace RestaurantReviews.Controllers
             var model =
                 _db.Restaurants
                 .Where(r => r.Name.StartsWith(term))
+                .Take(10)
                 .Select(r => new
                 {
                     label = r.Name
